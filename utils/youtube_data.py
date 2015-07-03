@@ -9,7 +9,7 @@ def get_first_video(name):
     return ''  # The initial results video ID (passed to get related vid)
 
 
-def get_related_to_video(name):
+def get_related_video(name):
     youtube_search = requests.get(
         'https://www.googleapis.com/youtube/v3/search?part' +
         '' +
