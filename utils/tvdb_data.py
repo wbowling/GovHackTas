@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-import json
 import requests
 import xml.etree.ElementTree as ET
 from optparse import OptionParser
-from local import API_KEY
+from local import TVDB_API_KEY
 from xml2json import xml2json
 
 
