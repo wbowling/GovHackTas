@@ -1,7 +1,10 @@
 import json
 import requests
+import xml.etree.ElementTree as ET
+import StringIO
+from local import API_KEY
 
-api_key = '3F0697355EF5230B'
+api_key = API_KEY
 
 
 def convert_xml_to_json(data):
@@ -14,12 +17,13 @@ def get_series_id(series_name):
         'GetSeries.php?seriesname=' +
         series_name)
 
-    print tvbd_request
     response = tvbd_request.content
-    print response
+    tree = ET.fromstring(response)
+    series = tree.find('Series')
+    series_id = series.find('seriesid')
+    return series_id
 
 
 def get_series_episode(series_id, season_number, episode_number):
+    get_series_id('Supernatural')
     pass
-
-get_series_id('Supernatural')
