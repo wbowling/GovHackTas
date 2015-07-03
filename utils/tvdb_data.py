@@ -1,7 +1,8 @@
+#!/usr/bin/env python
 import json
 import requests
 import xml.etree.ElementTree as ET
-import StringIO
+from optparse import OptionParser
 from local import API_KEY
 from xml2json import xml2json
 
@@ -10,7 +11,7 @@ def get_series_id(series_name):
     tvbd_request = requests.get(
         'http://thetvdb.com/api/' +
         'GetSeries.php?seriesname=' +
-        series_name)
+        str(series_name))
 
     response = tvbd_request.content
     tree = ET.fromstring(response)
@@ -21,7 +22,7 @@ def get_series_id(series_name):
 
 def return_json(data):
     data = xml2json(data)
-    print data
+    return data
 
 
 def get_series_episode(series_name, se, ep):
@@ -38,4 +39,20 @@ def get_series_episode(series_name, se, ep):
     response = tvbd_request.content
     print return_json(response)
 
-get_series_episode('Supernatural', 1, 3)
+
+class ParserOptions():
+    parser = OptionParser(
+        description="Pulls data from tvdb!",
+        prog='tvdb_data',
+        usage='./%prog.py -n series_name -s season_num -e episode_num '
+        )
+    parser.add_option("-n", "--name", action='store', dest='name')
+    parser.add_option("-s", "--season", action='store', dest='season')
+    parser.add_option("-e", "--episode", action='store', dest='episode')
+
+    options, arguments = parser.parse_args()
+
+    name = str(options.name)
+    season = str(options.season)
+    episode = str(options.episode)
+    get_series_episode(name, season, episode)

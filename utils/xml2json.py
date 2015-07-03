@@ -135,7 +135,7 @@ def xml2json(xmlstring, strip_ns=1, strip=1):
     """Convert an XML string into a JSON string."""
 
     elem = ET.fromstring(xmlstring)
-    return elem2json(elem, options, strip_ns=strip_ns, strip=strip)
+    return elem2json(elem, strip_ns=strip_ns, strip=strip)
 
 
 def json2xml(json_data, factory=ET.Element):
