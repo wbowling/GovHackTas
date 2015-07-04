@@ -18,7 +18,7 @@ object TVNormalizing {
 
   def channelQuery(state: String): QueryBuilder = {
     val bool = QueryBuilders.boolQuery()
-    states.get(state.toUpperCase).map(_ :+ "Network").foreach {
+    (states(state.toUpperCase) :+ "Network").foreach {
       name => bool.should(QueryBuilders.termQuery("ChildChannel", name))
     }
     bool

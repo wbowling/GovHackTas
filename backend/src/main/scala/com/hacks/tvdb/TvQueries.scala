@@ -43,6 +43,7 @@ object TvQueries extends App {
     
     val combined = queries.foldLeft(QueryBuilders.boolQuery())((b, q) => b.must(q))
     search.setQuery(combined)
+    println(search)
     search.execute().map(_.getHits.map(hitToAiring).toIterable)
   }
 

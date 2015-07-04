@@ -30,10 +30,7 @@ object ElasticClient {
     val s = ImmutableSettings.settingsBuilder()
     s.classLoader(classOf[Classes].getClassLoader)
     s.put("cluster.name", "elasticsearch")
-    val hostname = "192.168.15.182"
-    s.put("name", hostname)
-    s.put("network.host", hostname)
-    s.put("discovery.zen.ping.unicast.hosts", "192.168.15.202:9300") // "localhost:9300")// "192.168.15.202:9300")
+    s.put("discovery.zen.ping.unicast.hosts", "192.168.15.202:9300")
     s.put("http.enabled", true)
     val node = NodeBuilder.nodeBuilder().client(true).settings(s).node()
     val client = node.client()
