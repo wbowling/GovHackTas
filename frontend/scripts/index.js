@@ -12,9 +12,9 @@ var Schooling = require('./pages/schooling');
 Router.run((
 
     <Route path="/" handler={App}>
-        <DefaultRoute name="Year" handler={Year} />
-        <Route name="state" handler={State} path="/:year/state" />
-        <Route name="state" handler={Schooling} path="/:year/:state/schooling" />
+        <DefaultRoute name="Year" handler={Year} path="year" />
+        <Route name="state" handler={State} path="state/:year" />
+        <Route name="schooling" handler={Schooling} path="schooling/:state/:year" />
     </Route>
 ), Handler => {
     React.render(<Handler/>, document.getElementById('content'))
