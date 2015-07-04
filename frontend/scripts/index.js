@@ -7,6 +7,7 @@ var DefaultRoute = Router.DefaultRoute;
 //Pages
 var Year = require('./pages/year');
 var State = require('./pages/state');
+var Schooling = require('./pages/schooling');
 
 Router.run((
 
