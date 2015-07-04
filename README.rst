@@ -17,6 +17,6 @@ Youtube Search Query Script
 ---------------------------
 
 Usage for the `youtube_data` script ::
-	./youtube_data.py -q "query"
+	./youtube_data.py -q "Funny Cats"
 
 For help use `./youtube_data.py -- help`
