@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import requests
 import json
+import urllib
 from optparse import OptionParser
 from local import YOUTUBE_API_KEY
 
@@ -9,7 +10,7 @@ def get_first_video(name):
     youtube_search = requests.get(
         'https://www.googleapis.com/youtube/v3/search?part=snippet' +
         '&type=video' +
-        '&q=' + str(name) +
+        '&q=' + str(urllib.quote(name)) +
         '&maxResults=1' +
         '&key=' + YOUTUBE_API_KEY)
 
