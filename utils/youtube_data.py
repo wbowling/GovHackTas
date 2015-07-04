@@ -16,10 +16,13 @@ def get_first_video(name):
         '&key=' + YOUTUBE_API_KEY)
 
     reponse = youtube_search.content
-
     json_response = json.loads(reponse)
-    video_id = json_response['items'][0]['id']['videoId']
-    print video_id
+    items = json_response['items']
+    if len(items) > 0:
+        video_id = items[0]['id']['videoId']
+        print video_id
+    else:
+        print "No results found"
 
 
 def get_first_video_intro(name):
