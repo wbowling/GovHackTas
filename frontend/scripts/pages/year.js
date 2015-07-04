@@ -40,9 +40,9 @@ var Year = React.createClass({
     render() {
         return (
             <div className="year">
-                <button onMouseDown={this.addYear} onMouseUp={this.mouseUp}>Up</button>
+                <button className="year--control up" onMouseDown={this.addYear} onMouseUp={this.mouseUp}>&#x25B2;</button>
                 <input className="year--input" disabled="disabled" type="number" min="1930" max="1999" value={this.state.year}></input>
-                <button onMouseDown={this.takeYear} onMouseUp={this.mouseUp}>Down</button>
+                <button className="year--control down" onMouseDown={this.takeYear} onMouseUp={this.mouseUp}>&#x25BC;</button>
                 <Link to="state">Pick State</Link>
             </div>
         );

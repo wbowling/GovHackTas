@@ -23,9 +23,37 @@ html *  {
     text-align: center;
     outline: none;
     border: none;
-    top: 30%;
+    top: 230px;
     color: white;
-    left:0; 
+    left:0;
+    z-index: 10;
+}
+
+.year--control {
+    z-index: 20;
+    background: none;
+    outline: none;
+    border:none;
+    font-size: 64px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+}
+
+.year--control:hover{
+    color: rgb(119, 119, 123)
+}
+
+.year--control.up{
+    top: 175px;
+    width: 100%;
+    text-align: center;
+}
+
+.year--control.down{
+    top: 480px;
+    width: 100%;
+    text-align: center;
 }
 
 /**
