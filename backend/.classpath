@@ -1,0 +1,30 @@
+<classpath>
+  <classpathentry kind="src" path="src/main/scala"/>
+  <classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/com.typesafe.akka/akka-http-core-experimental_2.11/srcs/akka-http-core-experimental_2.11-1.0-RC4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/com.typesafe.akka/akka-http-core-experimental_2.11/jars/akka-http-core-experimental_2.11-1.0-RC4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/com.typesafe.akka/akka-parsing-experimental_2.11/srcs/akka-parsing-experimental_2.11-1.0-RC4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/com.typesafe.akka/akka-parsing-experimental_2.11/jars/akka-parsing-experimental_2.11-1.0-RC4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/com.typesafe.akka/akka-stream-experimental_2.11/srcs/akka-stream-experimental_2.11-1.0-RC4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/com.typesafe.akka/akka-stream-experimental_2.11/jars/akka-stream-experimental_2.11-1.0-RC4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/srcs/akka-actor_2.11-2.3.11-sources.jar" kind="lib" path="/home/will/.ivy2/cache/com.typesafe.akka/akka-actor_2.11/jars/akka-actor_2.11-2.3.11.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/com.typesafe/config/srcs/config-1.2.1-sources.jar" kind="lib" path="/home/will/.ivy2/cache/com.typesafe/config/bundles/config-1.2.1.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.reactivestreams/reactive-streams/srcs/reactive-streams-1.0.0-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.reactivestreams/reactive-streams/jars/reactive-streams-1.0.0.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.elasticsearch/elasticsearch/srcs/elasticsearch-1.6.0-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.elasticsearch/elasticsearch/jars/elasticsearch-1.6.0.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-core/srcs/lucene-core-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-core/jars/lucene-core-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-analyzers-common/srcs/lucene-analyzers-common-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-analyzers-common/jars/lucene-analyzers-common-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-queries/srcs/lucene-queries-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-queries/jars/lucene-queries-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-memory/srcs/lucene-memory-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-memory/jars/lucene-memory-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-highlighter/srcs/lucene-highlighter-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-highlighter/jars/lucene-highlighter-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-queryparser/srcs/lucene-queryparser-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-queryparser/jars/lucene-queryparser-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-sandbox/srcs/lucene-sandbox-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-sandbox/jars/lucene-sandbox-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-suggest/srcs/lucene-suggest-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-suggest/jars/lucene-suggest-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-misc/srcs/lucene-misc-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-misc/jars/lucene-misc-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-join/srcs/lucene-join-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-join/jars/lucene-join-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-grouping/srcs/lucene-grouping-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-grouping/jars/lucene-grouping-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.apache.lucene/lucene-spatial/srcs/lucene-spatial-4.10.4-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.apache.lucene/lucene-spatial/jars/lucene-spatial-4.10.4.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/com.spatial4j/spatial4j/srcs/spatial4j-0.4.1-sources.jar" kind="lib" path="/home/will/.ivy2/cache/com.spatial4j/spatial4j/bundles/spatial4j-0.4.1.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.antlr/antlr-runtime/srcs/antlr-runtime-3.5-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.antlr/antlr-runtime/jars/antlr-runtime-3.5.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.ow2.asm/asm/srcs/asm-4.1-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.ow2.asm/asm/jars/asm-4.1.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.ow2.asm/asm-commons/srcs/asm-commons-4.1-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.ow2.asm/asm-commons/jars/asm-commons-4.1.jar"/>
+  <classpathentry sourcepath="/home/will/.ivy2/cache/org.yaml/snakeyaml/srcs/snakeyaml-1.12-sources.jar" kind="lib" path="/home/will/.ivy2/cache/org.yaml/snakeyaml/bundles/snakeyaml-1.12.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="output" path="bin"/>
+</classpath>
