@@ -12,7 +12,7 @@ def get_first_video(name):
         '&type=video' +
         '&q=' + str(urllib.quote(name)) +
         '&maxResults=1' +
-        '&topicId=/m/01xrzjs '
+        # '&topicId=/m/01xrzjs ' TODO Make this work
         '&key=' + YOUTUBE_API_KEY)
 
     reponse = youtube_search.content
@@ -28,7 +28,7 @@ def get_first_video_intro(name):
         '&type=video' +
         '&q=' + str(urllib.quote(name)) + "(Intro)"
         '&maxResults=1' +
-        '&topicId=/m/01xrzjs'
+        # '&topicId=/m/01xrzjs ' TODO Make this work
         '&key=' + YOUTUBE_API_KEY)
 
     reponse = youtube_search.content
