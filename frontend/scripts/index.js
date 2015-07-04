@@ -12,7 +12,8 @@ Router.run((
 
     <Route path="/" handler={App}>
         <DefaultRoute name="Year" handler={Year} />
-        <Route name="state" handler={State} />
+        <Route name="state" handler={State} path="/:year/state" />
+        <Route name="state" handler={Schooling} path="/:year/:state/schooling" />
     </Route>
 ), Handler => {
     React.render(<Handler/>, document.getElementById('content'))
