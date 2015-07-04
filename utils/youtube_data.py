@@ -1,18 +1,38 @@
+#!/usr/bin/python
 import requests
+import json
+from optparse import OptionParser
 from local import YOUTUBE_API_KEY
 
 
 def get_first_video(name):
     youtube_search = requests.get(
-        'https://www.googleapis.com/youtube/v3/search?part' +
-        '')
-    return ''  # The initial results video ID (passed to get related vid)
+        'https://www.googleapis.com/youtube/v3/search?part=snippet' +
+        '&type=video' +
+        '&q=' + str(name) +
+        '&maxResults=1' +
+        '&key=' + YOUTUBE_API_KEY)
+
+    reponse = youtube_search.content
+
+    json_response = json.loads(reponse)
+    video_id = json_response['items'][0]['id']['videoId']
+    print video_id
 
 
-def get_related_video(name):
-    youtube_search = requests.get(
-        'https://www.googleapis.com/youtube/v3/search?part' +
-        '' +
-        '&relatedToVideoId=' + get_first_video(name))
+class ParserOptions():
+    parser = OptionParser(
+        description="Grabs first search result from a query",
+        prog='yt_query',
+        usage='./%prog.py -q "query" '
+        )
+    parser.add_option("-q", "--query", action='store', dest='query', help='Wrapped in quotes')
 
-    return ''  # Return the related vid url or id?
+    options, arguments = parser.parse_args()
+
+    if not options.query:
+        parser.error('Query not provided.')
+
+    query = str(options.query)
+
+    get_first_video(query)
