@@ -1,0 +1,33 @@
+body{
+    background: rgb(121, 121, 203);
+
+}
+
+html *  {
+    font-family: 'Oswald', sans-serif;
+}
+
+/**
+*   Year
+*/
+
+.intro{
+
+}
+
+.year--input{
+    position: absolute;
+    font-size: 200px;
+    width: 100%;
+    background: transparent;
+    text-align: center;
+    outline: none;
+    border: none;
+    top: 30%;
+    color: white;
+    left:0; 
+}
+
+/**
+* States
+*/

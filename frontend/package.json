@@ -1,22 +1,23 @@
 {
-  "name": "paydirt-card",
+  "name": "govhack2015",
   "version": "0.0.1",
   "description": "",
   "main": "/public/index.html",
-  "dependencies": {
-    "html-loader": "^0.2.3",
-    "jquery": "^2.1.4",
-    "jsx-loader": "^0.12.2",
-    "react": "^0.12.2"
-  },
-  "devDependencies": {
-    "react-hot-loader": "^1.1.5",
-    "webpack": "^1.5.3",
-    "webpack-dev-server": "^1.7.0"
-  },
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Seb Brown",
-  "license": "ISC"
+  "author": "Seb Brown & Ganng",
+  "license": "ISC",
+  "dependencies": {
+    "html-loader": "^0.3.0",
+    "jsx-loader": "^0.13.2",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3"
+  },
+  "devDependencies": {
+    "node-libs-browser": "^0.5.2",
+    "react-hot-loader": "^1.2.7",
+    "webpack": "^1.10.1",
+    "webpack-dev-server": "^1.10.1"
+  }
 }

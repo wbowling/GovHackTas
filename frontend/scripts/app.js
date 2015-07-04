@@ -1,10 +1,11 @@
 var React = require('react');
+var RouteHandler = require('react-router').RouteHandler;
 
 var App = React.createClass({
-  render: function() {
+  render() {
     return (
-      <div className="home">
-         Hey what's up
+      <div className="body">
+         <RouteHandler />
       </div>
     );
   }
