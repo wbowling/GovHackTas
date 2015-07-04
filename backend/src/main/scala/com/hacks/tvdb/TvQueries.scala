@@ -25,6 +25,8 @@ import org.elasticsearch.search.sort.SortOrder
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.model.HttpResponse
 import com.hacks.tvdb.SeriesLookup.SeriesLookupResult
+import akka.http.scaladsl.model.headers._
+import akka.http.scaladsl.model.HttpMethods._
 
 /**
  * @author tleuser
@@ -119,7 +121,17 @@ object TvQueries extends App {
         }
       }
 
-  val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", 8080)
+  val optionsSupport = {
+    options { complete("") }
+  }
+
+  val corsHeaders = List(`Access-Control-Allow-Origin`.*, `Access-Control-Allow-Methods`(GET, POST, PUT, OPTIONS, DELETE),
+    `Access-Control-Allow-Headers`("Origin, X-Requested-With, Content-Type, Accept, Authorization"))
+
+  val corsRoutes = {
+    respondWithHeaders(corsHeaders) { route ~ optionsSupport }
+  }
+  val bindingFuture = Http().bindAndHandle(corsRoutes, "0.0.0.0", 8080)
 
   println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
   Console.readLine()
