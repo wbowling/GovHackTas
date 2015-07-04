@@ -12,6 +12,23 @@ def get_first_video(name):
         '&type=video' +
         '&q=' + str(urllib.quote(name)) +
         '&maxResults=1' +
+        '&topicId=/m/01xrzjs '
+        '&key=' + YOUTUBE_API_KEY)
+
+    reponse = youtube_search.content
+
+    json_response = json.loads(reponse)
+    video_id = json_response['items'][0]['id']['videoId']
+    print video_id
+
+
+def get_first_video_intro(name):
+    youtube_search = requests.get(
+        'https://www.googleapis.com/youtube/v3/search?part=snippet' +
+        '&type=video' +
+        '&q=' + str(urllib.quote(name)) + "(Intro)"
+        '&maxResults=1' +
+        '&topicId=/m/01xrzjs'
         '&key=' + YOUTUBE_API_KEY)
 
     reponse = youtube_search.content

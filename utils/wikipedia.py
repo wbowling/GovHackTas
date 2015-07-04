@@ -10,8 +10,6 @@ base_url = 'https://en.wikipedia.org/w/api.php?'
 
 
 def subit(msg):
-    # Use the below if the string is multiline
-    # subbed = re.compile("(<.*?>)" re.DOTALL).sub("(<hh  >t", msg)
     subbed = re.sub("(\[.*?\])", "", msg)
     return subbed
 
@@ -25,7 +23,6 @@ def get_wikipedia_page_id(title):
         '&inprop=url'
         '&format=json')
     wikipedia_response = requests.get(request).content
-
     json_response = json.loads(wikipedia_response)
     page_json = json_response['query']['pages']
 

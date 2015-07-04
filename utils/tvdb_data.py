@@ -7,6 +7,11 @@ from local import TVDB_API_KEY
 from xml2json import xml2json
 
 
+def return_json(data):
+    data = xml2json(data)
+    return data
+
+
 def get_series_id(series_name):
     tvbd_request_str = (
         'http://thetvdb.com/api/' +
@@ -25,9 +30,22 @@ def get_series_id(series_name):
         print 'Query returned nothing'
 
 
-def return_json(data):
-    data = xml2json(data)
-    return data
+def get_series_info(series_name):
+    tvbd_request_str = (
+        'http://thetvdb.com/api/' +
+        'GetSeries.php?seriesname=' +
+        str(urllib.quote(series_name)))
+
+    tvbd_request = requests.get(tvbd_request_str)
+
+    response = tvbd_request.content
+    tree = ET.fromstring(response)
+    series = tree.find('Series')
+    if series is not None:
+        overview = series.find('Overview')
+        print overview.text
+    else:
+        print 'Query returned nothing'
 
 
 def get_series_episode(series_name, se, ep):
@@ -61,12 +79,15 @@ class ParserOptions():
 
     if not options.name:
         parser.error('Series name not given.')
-    elif not options.season:
-        parser.error('Season number not given.')
-    elif not options.episode:
-        parser.error('Episode number not given.')
 
     name = str(options.name)
     season = str(options.season)
     episode = str(options.episode)
-    get_series_episode(name, season, episode)
+    # TODO FIX HACK BELOW
+    if len(season) == 4:
+        # TODO FIX HACK ABOVE
+        print 'getting series info'
+        get_series_info(name)
+    else:
+        print 'getting series ep'
+        get_series_episode(name, season, episode)
