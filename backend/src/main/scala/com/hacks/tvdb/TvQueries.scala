@@ -22,6 +22,8 @@ import org.elasticsearch.search.aggregations.AggregationBuilders
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregator
 import org.elasticsearch.search.aggregations.bucket.terms.Terms
 import org.elasticsearch.search.sort.SortOrder
+import akka.http.scaladsl.model.StatusCodes
+import akka.http.scaladsl.model.HttpResponse
 
 /**
  * @author tleuser
@@ -45,11 +47,11 @@ object TvQueries extends App {
       endTime.foreach { end => rq.lt(TimeUnit.HOURS.toMillis(end)) }
       rq
     }
-    val queries: Iterable[QueryBuilder] = startQ ++ 
-    series.map(QueryBuilders.matchPhraseQuery("Series", _)) ++
-    year.map(y => TVNormalizing.yearQuery(y)) ++ 
-    state.map(TVNormalizing.channelQuery)
-    
+    val queries: Iterable[QueryBuilder] = startQ ++
+      series.map(QueryBuilders.matchPhraseQuery("Series", _)) ++
+      year.map(y => TVNormalizing.yearQuery(y)) ++
+      state.map(TVNormalizing.channelQuery)
+
     val combined = queries.foldLeft(QueryBuilders.boolQuery())((b, q) => b.must(q))
     search.setQuery(combined)
     search.addAggregation(AggregationBuilders.terms("series").field("Series.raw"))
@@ -80,7 +82,7 @@ object TvQueries extends App {
 
   case class Show(name: String, count: Long)
   implicit val showFormat = jsonFormat2(Show)
-  
+
   case class AiringResults(airings: Iterable[Airing], shows: Iterable[Show])
   implicit val airingResultsFormat = jsonFormat2(AiringResults)
 
@@ -93,7 +95,12 @@ object TvQueries extends App {
           "starthour".as[Int].?,
           "endhour".as[Int].?) {
             (series, year, state, startHour, endHour) =>
-              complete { query(series, year, state, startHour, endHour) }
+              parameterMap { params =>
+                val extra = params -- List("series", "year", "state", "starthour", "endhour")
+                if (!extra.isEmpty) complete { HttpResponse(StatusCodes.BadRequest,
+                    entity = """invalid parameter, can use "series", "year", "state", "starthour", "endhour"""")
+                } else complete { query(series, year, state, startHour, endHour) }
+              }
           }
       }
     }
