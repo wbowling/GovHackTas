@@ -21,6 +21,7 @@ import org.elasticsearch.search.facet.FacetBuilders
 import org.elasticsearch.search.aggregations.AggregationBuilders
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregator
 import org.elasticsearch.search.aggregations.bucket.terms.Terms
+import org.elasticsearch.search.sort.SortOrder
 
 /**
  * @author tleuser
@@ -29,11 +30,14 @@ object TvQueries extends App {
   implicit val system = ActorSystem("my-system")
   implicit val materializer = ActorMaterializer()
 
-  def query(show: Option[String], year: Option[Int], state: Option[String], startTime: Option[Int], endTime: Option[Int]): Future[AiringResults] = {
+  def query(series: Option[String], year: Option[Int], state: Option[String], startTime: Option[Int], endTime: Option[Int]): Future[AiringResults] = {
     import scala.concurrent.ExecutionContext.Implicits._
     val search = client.prepareSearch("govhack")
     search.addFields("StartTime", "Date")
     search.setFetchSource(true)
+    search.addSort("Date", SortOrder.ASC)
+    search.addSort("StartTime", SortOrder.ASC)
+    search.setSize(50)
 
     val startQ = startTime.orElse(endTime).map { _ =>
       val rq = QueryBuilders.rangeQuery("StartTime")
@@ -41,10 +45,11 @@ object TvQueries extends App {
       endTime.foreach { end => rq.lt(TimeUnit.HOURS.toMillis(end)) }
       rq
     }
-    val queries: Iterable[QueryBuilder] = startQ ++
-      year.map(y => TVNormalizing.yearQuery(y)) ++
-      state.map(TVNormalizing.channelQuery)
-
+    val queries: Iterable[QueryBuilder] = startQ ++ 
+    series.map(QueryBuilders.matchPhraseQuery("Series", _)) ++
+    year.map(y => TVNormalizing.yearQuery(y)) ++ 
+    state.map(TVNormalizing.channelQuery)
+    
     val combined = queries.foldLeft(QueryBuilders.boolQuery())((b, q) => b.must(q))
     search.setQuery(combined)
     search.addAggregation(AggregationBuilders.terms("series").field("Series.raw"))
@@ -62,14 +67,16 @@ object TvQueries extends App {
   def hitToAiring(searchHit: SearchHit): Airing = {
     val map = searchHit.getSource.toMap
     val series = map.get("Series").map(_.toString).getOrElse("")
+    val channel = map.get("ChildChannel").map(_.toString).getOrElse("")
     val episode = map.get("ProgEpisodeName").map(_.toString).getOrElse("")
     val date = searchHit.getFields.get("Date").value[String]()
     val startTime = searchHit.getFields.get("StartTime").value[String]()
-    Airing(series, episode, s"$date $startTime")
+    Airing(series, episode, channel, s"$date $startTime")
   }
 
-  case class Airing(series: String, episode: String, startTime: String)
-  implicit val airingFormat = jsonFormat3(Airing)
+  case class Airing(series: String, episode: String, channel: String, startTime: String)
+
+  implicit val airingFormat = jsonFormat4(Airing)
 
   case class Show(name: String, count: Long)
   implicit val showFormat = jsonFormat2(Show)
@@ -78,15 +85,15 @@ object TvQueries extends App {
   implicit val airingResultsFormat = jsonFormat2(AiringResults)
 
   val route =
-    path("query") {
+    path("airings") {
       get {
-        parameters("show".?,
+        parameters("series".?,
           "year".as[Int].?,
           "state".?,
           "starthour".as[Int].?,
           "endhour".as[Int].?) {
-            (show, year, state, startHour, endHour) =>
-              complete { query(show, year, state, startHour, endHour) }
+            (series, year, state, startHour, endHour) =>
+              complete { query(series, year, state, startHour, endHour) }
           }
       }
     }
