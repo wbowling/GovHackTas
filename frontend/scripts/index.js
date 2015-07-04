@@ -16,7 +16,7 @@ Router.run((
         <DefaultRoute name="Year" handler={Year} />
         <Route name="state" handler={State} path="state/:year" />
         <Route name="schooling" handler={Schooling} path="schooling/:state/:year" />
-        <Route name="listing" handler={Listing} path="listing/:schooling/:state/:year" />
+        <Route name="listing" handler={Listing} path="listing/:state/:year" />
     </Route>
 ), Handler => {
     React.render(<Handler/>, document.getElementById('content'))
