@@ -39,6 +39,8 @@ def get_series_info(series_name):
     tvbd_request = requests.get(tvbd_request_str)
 
     response = tvbd_request.content
+    print return_json(response)
+    '''
     tree = ET.fromstring(response)
     series = tree.find('Series')
     if series is not None:
@@ -46,6 +48,7 @@ def get_series_info(series_name):
         print overview.text
     else:
         print 'Query returned nothing'
+    '''
 
 
 def get_series_episode(series_name, se, ep):
@@ -86,8 +89,6 @@ class ParserOptions():
     # TODO FIX HACK BELOW
     if len(season) == 4:
         # TODO FIX HACK ABOVE
-        print 'getting series info'
         get_series_info(name)
     else:
-        print 'getting series ep'
         get_series_episode(name, season, episode)
