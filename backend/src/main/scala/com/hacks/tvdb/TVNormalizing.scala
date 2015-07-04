@@ -17,11 +17,7 @@ object TVNormalizing {
     "WA" -> Seq("Western Australia Perth", "Western Australia State", "Western Australia Regionals", "Perth"))
 
   def channelQuery(state: String): QueryBuilder = {
-    val bool = QueryBuilders.boolQuery()
-    (states(state.toUpperCase) :+ "Network").foreach {
-      name => bool.should(QueryBuilders.termQuery("ChildChannel", name))
-    }
-    bool
+    QueryBuilders.termQuery("ChildChannel", state.toUpperCase())
   }
 
   def yearQuery(year: Int, span: Int = 1): QueryBuilder = {
