@@ -17,8 +17,8 @@ var Schooling = React.createClass({
     render(){
         return(
             <div className="schooling">
-                <button value="primary" onClick={this.toList} className="primary">Primary</button>
-            	<button value="secondary" onClick={this.toList} className="secondary">Secondary</button>
+                <div value="primary" onClick={this.toList} className="primary">Primary</div>
+            	<div value="secondary" onClick={this.toList} className="secondary">Secondary</div>
             </div>
         );
     }

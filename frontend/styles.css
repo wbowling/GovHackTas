@@ -60,6 +60,88 @@ html *  {
 * States
 */
 
+svg{
+    top: 100px;
+    left: 25%;
+    position: absolute;
+}
+
+svg > path {
+    cursor: pointer;
+    stroke-width: 1;
+    stroke: black;
+    fill: gray;
+}
+
 svg > path:hover {
     fill: #fce57e;
+}
+
+/**
+* Schooling
+*/
+.schooling{
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+.schooling > .primary {
+    position: relative;
+    height: 100%;
+    width: 49.6%;
+    left:0;
+    float:left;
+    border-right: 5px solid black;
+}
+
+.schooling > .primary:hover{
+    background:  #fce57e;
+}
+.schooling > .secondary {
+    position: relative;
+    height: 100%;
+    width: 50%;
+    right: 0;
+    float: right;
+}
+
+.schooling > .secondary:hover {
+    background: #fce57e;
+}
+
+
+
+/**
+*   Listing
+*/
+
+img.loading{
+    display: block;
+    margin: 0 auto;
+}
+
+.listing{
+    text-align: center;
+    font-size: 32px;
+}
+
+.listing-item{
+    background: black;
+    color: white;
+    padding: 12px;
+    margin: 8px 0;
+    cursor: pointer;
+    border: 2px solid gray;
+    box-shadow: 2px 2px gray;
+}
+
+
+.listing-item--content > img{
+    width: 100%;
+    padding-top: 12px;
+}
+
+.listing-item--content > p {
+    text-align: left;
+    font-size: 24px;
 }
