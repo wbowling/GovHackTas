@@ -24,17 +24,19 @@ import org.elasticsearch.search.aggregations.bucket.terms.Terms
 import org.elasticsearch.search.sort.SortOrder
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.model.HttpResponse
+import com.hacks.tvdb.SeriesLookup.SeriesLookupResult
 
 /**
  * @author tleuser
  */
 object TvQueries extends App {
+  val indexName = "govhack2"
   implicit val system = ActorSystem("my-system")
   implicit val materializer = ActorMaterializer()
 
   def query(series: Option[String], year: Option[Int], state: Option[String], startTime: Option[Int], endTime: Option[Int]): Future[AiringResults] = {
     import scala.concurrent.ExecutionContext.Implicits._
-    val search = client.prepareSearch("govhack")
+    val search = client.prepareSearch(indexName)
     search.addFields("StartTime", "Date")
     search.setFetchSource(true)
     search.addSort("Date", SortOrder.ASC)
@@ -85,6 +87,7 @@ object TvQueries extends App {
 
   case class AiringResults(airings: Iterable[Airing], shows: Iterable[Show])
   implicit val airingResultsFormat = jsonFormat2(AiringResults)
+  implicit val seriesLookupFormat = jsonFormat2(SeriesLookupResult)
 
   val route =
     path("airings") {
@@ -97,13 +100,24 @@ object TvQueries extends App {
             (series, year, state, startHour, endHour) =>
               parameterMap { params =>
                 val extra = params -- List("series", "year", "state", "starthour", "endhour")
-                if (!extra.isEmpty) complete { HttpResponse(StatusCodes.BadRequest,
+                if (!extra.isEmpty) complete {
+                  HttpResponse(StatusCodes.BadRequest,
                     entity = """invalid parameter, can use "series", "year", "state", "starthour", "endhour"""")
-                } else complete { query(series, year, state, startHour, endHour) }
+                }
+                else complete { query(series, year, state, startHour, endHour) }
               }
           }
       }
-    }
+    } ~
+      {
+        path("details") {
+          get {
+            parameters("series") { (name) =>
+              complete(SeriesLookup.lookupSeries(name))
+            }
+          }
+        }
+      }
 
   val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", 8080)
 
