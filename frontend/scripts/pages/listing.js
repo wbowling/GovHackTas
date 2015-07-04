@@ -26,7 +26,7 @@ var Listing = React.createClass({
     render(){
         var listingItems = this.state.showList.map((show, index) =>{
             return (
-                <ListingItem key={index} showName={ show["name"] } />
+                <ListingItem key={index} count={show.count} showName={ show.name } />
             )
         });
 

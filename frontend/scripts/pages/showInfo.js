@@ -18,7 +18,7 @@ var ShowInfo = React.createClass({
     render() {
         return (
             <div className="listing-item--content">
-                { this.state.banner ? <img src={this.state.banner} /> : '' }
+                <img src={this.state.banner} />
                 <p>{this.state.overview}</p>
                 <Youtube url={this.state.youtubeUrl} />
             </div>
