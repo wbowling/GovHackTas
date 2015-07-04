@@ -17,6 +17,10 @@ import org.elasticsearch.search.SearchHit
 import scala.collection.convert.WrapAsScala._
 import java.util.Date
 import akka.http.scaladsl.model.DateTime
+import org.elasticsearch.search.facet.FacetBuilders
+import org.elasticsearch.search.aggregations.AggregationBuilders
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregator
+import org.elasticsearch.search.aggregations.bucket.terms.Terms
 
 /**
  * @author tleuser
@@ -25,7 +29,7 @@ object TvQueries extends App {
   implicit val system = ActorSystem("my-system")
   implicit val materializer = ActorMaterializer()
 
-  def query(show: Option[String], year: Option[Int], state: Option[String], startTime: Option[Int], endTime: Option[Int]): Future[Iterable[Airing]] = {
+  def query(show: Option[String], year: Option[Int], state: Option[String], startTime: Option[Int], endTime: Option[Int]): Future[AiringResults] = {
     import scala.concurrent.ExecutionContext.Implicits._
     val search = client.prepareSearch("govhack")
     search.addFields("StartTime", "Date")
@@ -37,14 +41,22 @@ object TvQueries extends App {
       endTime.foreach { end => rq.lt(TimeUnit.HOURS.toMillis(end)) }
       rq
     }
-    val queries: Iterable[QueryBuilder] = startQ ++ 
-    year.map(y => TVNormalizing.yearQuery(y)) ++ 
-    state.map(TVNormalizing.channelQuery)
-    
+    val queries: Iterable[QueryBuilder] = startQ ++
+      year.map(y => TVNormalizing.yearQuery(y)) ++
+      state.map(TVNormalizing.channelQuery)
+
     val combined = queries.foldLeft(QueryBuilders.boolQuery())((b, q) => b.must(q))
     search.setQuery(combined)
+    search.addAggregation(AggregationBuilders.terms("series").field("Series.raw"))
     println(search)
-    search.execute().map(_.getHits.map(hitToAiring).toIterable)
+    search.execute().map(searchToAggs)
+  }
+
+  def searchToAggs(searchResp: SearchResponse): AiringResults = {
+    val searchAggs = searchResp.getAggregations
+    val airs = searchResp.getHits.map(hitToAiring).toIterable
+    val series: Terms = searchResp.getAggregations().get("series");
+    AiringResults(airs, series.getBuckets.map(b => Show(b.getKey, b.getDocCount)).filter { !_.name.isEmpty })
   }
 
   def hitToAiring(searchHit: SearchHit): Airing = {
@@ -57,8 +69,13 @@ object TvQueries extends App {
   }
 
   case class Airing(series: String, episode: String, startTime: String)
-
   implicit val airingFormat = jsonFormat3(Airing)
+
+  case class Show(name: String, count: Long)
+  implicit val showFormat = jsonFormat2(Show)
+  
+  case class AiringResults(airings: Iterable[Airing], shows: Iterable[Show])
+  implicit val airingResultsFormat = jsonFormat2(AiringResults)
 
   val route =
     path("query") {
