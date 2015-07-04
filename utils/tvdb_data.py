@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 import requests
 import urllib
 import xml.etree.ElementTree as ET
@@ -58,6 +58,13 @@ class ParserOptions():
     parser.add_option("-e", "--episode", action='store', dest='episode')
 
     options, arguments = parser.parse_args()
+
+    if not options.name:
+        parser.error('Series name not given.')
+    elif not options.season:
+        parser.error('Season number not given.')
+    elif not options.episode:
+        parser.error('Episode number not given.')
 
     name = str(options.name)
     season = str(options.season)
