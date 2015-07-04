@@ -9,7 +9,7 @@ TVDB Script
 -----------
 
 Usage for the :code:`tvdb_data` script 
-    :code:./tvdb_data.py -n "The Simpsons" -s 5 -e 2
+    :code:`./tvdb_data.py -n "The Simpsons" -s 5 -e 2`
 
 For help use :code:`./tvdb_data.py --help`
 
