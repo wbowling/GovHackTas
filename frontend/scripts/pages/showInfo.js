@@ -33,7 +33,7 @@ var ShowInfo = React.createClass({
     render() {
         if (this.state.nothing)
         {
-            return <div>Sorry, no info found...</div>
+            return <div>Sorry, no info found, would you like to <a href='/'>contribute</a>?</div>
         }
         else{
             return (
