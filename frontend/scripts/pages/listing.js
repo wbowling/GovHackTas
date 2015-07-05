@@ -1,8 +1,9 @@
 var React = require('react');
-var { State } = require('react-router');
+var { State, Link } = require('react-router');
 var backend = require('./../backend');
 
 var ListingItem = require('./listingItem');
+
 
 var Listing = React.createClass({
     mixins: [State],
@@ -74,6 +75,7 @@ var Listing = React.createClass({
                     <input defaultValue={this.state.year} min="1978" max="2011" type="range" step="1" ref="yearSlider" onChange={this.sliderMove} onMouseUp={this.sliderFinished}/>
                 </div>
                 <button className='listing--control' onClick={this.addYear}>&#x25B6;</button>
+                <Link to='Year'><i className="fa fa-home"></i></Link>
                 { listingItems }
 
             </div>
