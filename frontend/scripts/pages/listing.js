@@ -14,8 +14,12 @@ var Listing = React.createClass({
     },
 
     backendCallback(data) {
+        var shows = data.shows;
+        shows.sort(function(a, b){
+            return b.count - a.count;
+        });
         this.setState({
-            showList: data.shows
+            showList: shows
         })
     },
 
@@ -54,10 +58,6 @@ var Listing = React.createClass({
         this.sliderFinished({target:slider})
     }},
 
-    shouldComponentUpdate(nextProps, nextState){
-        return true;//this.state.showList !== nextState.showList;
-    },
-
     render(){
         var listingItems = this.state.showList.map((show, index) =>{
             return (
@@ -70,7 +70,9 @@ var Listing = React.createClass({
                 <span className="listing--year">{this.state.year}</span>
                 <br/>
                 <button className='listing--control' onClick={this.removeYear}>&#x25C0;</button>
-                <input defaultValue={this.state.year} min="1978" max="2011" type="range" step="1" ref="yearSlider" onChange={this.sliderMove} onMouseUp={this.sliderFinished}/>
+                <div className='slider-container'>
+                    <input defaultValue={this.state.year} min="1978" max="2011" type="range" step="1" ref="yearSlider" onChange={this.sliderMove} onMouseUp={this.sliderFinished}/>
+                </div>
                 <button className='listing--control' onClick={this.addYear}>&#x25B6;</button>
                 { listingItems }
 

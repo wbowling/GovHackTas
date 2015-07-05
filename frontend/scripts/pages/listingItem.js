@@ -58,7 +58,8 @@ var ListingItem = React.createClass({
 
         return(
             <div className="listing-item" onClick={this.toggle}>
-                {this.props.showName} [ {this.props.count} ]
+                {this.props.showName}
+                <span className="listing-item--count">{this.props.count} airings</span>
                 {contents}
             </div>
         )

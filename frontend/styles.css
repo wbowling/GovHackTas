@@ -96,6 +96,12 @@ img.loading{
     font-size: 32px;
 }
 
+.listing--year{
+    font-weight: 600;
+    font-size: 77px;
+    color: white;
+}
+
 .listing-item{
     background: black;
     color: white;
@@ -104,6 +110,11 @@ img.loading{
     cursor: pointer;
     border: 2px solid gray;
     box-shadow: 2px 2px gray;
+}
+
+.listing-item--count{
+    position: absolute;
+    right: 30px;
 }
 
 
@@ -127,5 +138,47 @@ img.loading{
 }
 
 .listing--control:hover {
-    color: rgb(119, 119, 123)
+    color: rgb(119, 119, 123);
+}
+
+
+/*
+* Slider
+*/
+
+.slider-container{
+    display: inline;
+  top: -7px;
+  position: relative;
+
+}
+
+input[type=range]{
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: black;
+    margin-top: -4px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
 }
