@@ -26,7 +26,7 @@ var Year = React.createClass({
             }else{
                 currentYear--;
             }
-            if(currentYear > 1980 && currentYear < 2005)
+            if(currentYear > 1977 && currentYear < 2012)
             {
                 this.setState({
                     year: currentYear

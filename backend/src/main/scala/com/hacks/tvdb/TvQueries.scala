@@ -32,7 +32,7 @@ import org.apache.commons.lang3.text.WordUtils
  * @author tleuser
  */
 object TvQueries extends App {
-  val indexName = "govhack2"
+  val indexName = "govhack3"
   implicit val system = ActorSystem("my-system")
   implicit val materializer = ActorMaterializer()
 

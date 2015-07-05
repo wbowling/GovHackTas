@@ -8,7 +8,14 @@ var ShowInfo = React.createClass({
 
         var summary = JSON.parse(data.summary);
 
+        if(summary["Data"] == null)
+        {
+            return { nothing: true };
+        }
+
         var seriesInfo = summary["Data"]["Series"];
+
+
         if (seriesInfo.constructor === Array)
         {
             seriesInfo = seriesInfo[0];
@@ -24,13 +31,19 @@ var ShowInfo = React.createClass({
 
 
     render() {
-        return (
-            <div className="listing-item--content">
-                <img src={this.state.banner} />
-                <p>{this.state.overview}</p>
-                <Youtube url={this.state.youtubeUrl} />
-            </div>
-        )
+        if (this.state.nothing)
+        {
+            return <div>Sorry, no info found...</div>
+        }
+        else{
+            return (
+                <div className="listing-item--content">
+                    <img src={this.state.banner} />
+                    <p>{this.state.overview}</p>
+                    <Youtube url={this.state.youtubeUrl} />
+                </div>
+            )
+        }
     }
 })
 
