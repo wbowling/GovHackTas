@@ -55,6 +55,5 @@ class ParserOptions():
         parser.error('Query not provided.')
 
     query = str(options.query.title())
-    print query
 
     get_first_video(query)
