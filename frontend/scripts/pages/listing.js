@@ -52,6 +52,7 @@ var Listing = React.createClass({
                 <br/>
                 <input defaultValue={this.state.year} min="1980" max="2005" type="range" step="1" ref="yearSlider" onChange={this.sliderMove} onMouseUp={this.sliderFinished}/>
                 { listingItems }
+
             </div>
         );
     }

@@ -33,7 +33,14 @@ var ListingItem = React.createClass({
 
     fetchShowInfo(){
         backend.getShowInfo(this.props.showName, this.backendCallback);
+    },
 
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            closed: true,
+            showInfo: null,
+            thinking: false
+        });
     },
 
     render() {
