@@ -18,7 +18,7 @@ html *  {
 .year--input{
     position: absolute;
     font-size: 200px;
-    width: 100%;
+    width: 99%; /* TODO Fix height properly */
     background: transparent;
     text-align: center;
     outline: none;
@@ -46,13 +46,13 @@ html *  {
 
 .year--control.up{
     top: 175px;
-    width: 100%;
+    width: 99%;
     text-align: center;
 }
 
 .year--control.down{
     top: 480px;
-    width: 100%;
+    width: 99%;
     text-align: center;
 }
 
@@ -60,7 +60,7 @@ html *  {
     position: absolute;
     top: 600px;
     text-align: center;
-    width: 100%;
+    width: 99%;
     text-decoration: none;
     color: white;
     font-weight: 600;
