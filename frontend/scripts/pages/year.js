@@ -1,7 +1,6 @@
 var React = require('react');
 var {Router} = require('react-router');
 var Link = require('react-router').Link;
-var interval;
 
 var Year = React.createClass({
     getInitialState() {
@@ -19,32 +18,22 @@ var Year = React.createClass({
     },
 
     alterYear(up){
-        interval = setInterval(function(){
-            var currentYear = this.state.year;
-            if(up){
-                currentYear++;
-            }else{
-                currentYear--;
-            }
-            if(currentYear > 1977 && currentYear < 2012)
-            {
-                this.setState({
-                    year: currentYear
-                });
-            }
-        }.bind(this), 100);
+        var newYear = up ? (this.state.year + 1) : (this.state.year -1);
+        if(newYear > 1977 && newYear < 2012)
+        {
+            this.setState({
+                year: newYear
+            });
+        }
 
     },
 
-    mouseUp(){
-        clearInterval(interval);
-    },
     render() {
         return (
             <div className="year">
-                <button className="year--control up" onMouseDown={this.addYear} onMouseUp={this.mouseUp}>&#x25B2;</button>
+                <button className="year--control up" onClick={this.addYear}>&#x25B2;</button>
                 <input className="year--input" disabled="disabled" type="number" min="1930" max="1999" value={this.state.year}></input>
-                <button className="year--control down" onMouseDown={this.takeYear} onMouseUp={this.mouseUp}>&#x25BC;</button>
+                <button className="year--control down" onClick={this.takeYear}>&#x25BC;</button>
                 <Link to="state" params={{year: this.state.year}}>Pick State</Link>
             </div>
         );
