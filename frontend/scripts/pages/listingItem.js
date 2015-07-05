@@ -32,7 +32,7 @@ var ListingItem = React.createClass({
     },
 
     fetchShowInfo(){
-        backend.getShowInfo(this.props.showName, this.backendCallback)
+        backend.getShowInfo(this.props.showName, this.backendCallback);
 
     },
 

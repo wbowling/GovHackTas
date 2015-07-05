@@ -8,14 +8,14 @@ var backend = {
         fetch(`${endpoint}/airings?year=${year}&state=${state}${hourParam}`)
             .then( data => data.json())
             .then( json => cb(json))
-            .catch(console.log('ooooh shiiiet'));
+            .catch(error => console.log(error));
     },
 
     getShowInfo: function(show, cb){
         fetch(`${endpoint}/details?series=${show}`)
             .then( data => data.json())
             .then( json => cb(json))
-            .catch(console.log('ooooh shiiiet'));
+            .catch( error => console.log(error));
     }
 }
 

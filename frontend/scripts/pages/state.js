@@ -16,7 +16,7 @@ var State = React.createClass({
 
     stateSelect(e){
     	var st = e.target.dataset.value;
-    	this.transitionTo("schooling", {year: this.getParams().year, state: st})
+    	this.transitionTo("listing", {year: this.getParams().year, state: st})
     },
 
     render(){

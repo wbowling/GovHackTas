@@ -8,6 +8,7 @@ var Listing = React.createClass({
     mixins: [State],
     getInitialState(){
         return{
+            year: this.getParams().year,
             showList: []
         }
     },
@@ -23,6 +24,21 @@ var Listing = React.createClass({
         backend.getList(year, state, this.backendCallback);
     },
 
+    sliderFinished(e){
+        var { state } = this.getParams();
+        backend.getList(e.target.value, state, this.backendCallback);
+    },
+
+    sliderMove(e){
+        this.setState({
+            year: e.target.value
+        })
+    },
+
+    shouldComponentUpdate(nextProps, nextState){
+        return true;//this.state.showList !== nextState.showList;
+    },
+
     render(){
         var listingItems = this.state.showList.map((show, index) =>{
             return (
@@ -32,6 +48,9 @@ var Listing = React.createClass({
 
         return(
             <div className="listing">
+                <span className="listing--year">{this.state.year}</span>
+                <br/>
+                <input defaultValue={this.state.year} min="1980" max="2005" type="range" step="1" ref="yearSlider" onChange={this.sliderMove} onMouseUp={this.sliderFinished}/>
                 { listingItems }
             </div>
         );
@@ -39,34 +58,3 @@ var Listing = React.createClass({
 });
 
 module.exports = Listing;
-
-var fakeShowListing = {
-    "shows": [{
-    "name": "Play School",
-    "count": 253
-  }, {
-    "name": "Heartbreak High",
-    "count": 150
-  }, {
-    "name": "Feral TV",
-    "count": 107
-  }, {
-    "name": "Trap Door, The",
-    "count": 100
-  }, {
-    "name": "Secret World Of Alex Mack, The",
-    "count": 91
-  }, {
-    "name": "Sunday Afternoon With Andrea Stretton",
-    "count": 91
-  }, {
-    "name": "Wildlife",
-    "count": 91
-  }, {
-    "name": "Gardening Australia",
-    "count": 84
-  }, {
-    "name": "Sesame Street",
-    "count": 83
-  }]
-}
