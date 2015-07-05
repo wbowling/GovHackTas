@@ -83,40 +83,6 @@ svg > path:hover {
 }
 
 /**
-* Schooling
-*/
-.schooling{
-    height: 100%;
-    position: absolute;
-    width: 100%;
-}
-.schooling > .primary {
-    position: relative;
-    height: 100%;
-    width: 49.6%;
-    left:0;
-    float:left;
-    border-right: 5px solid black;
-}
-
-.schooling > .primary:hover{
-    background:  #fce57e;
-}
-.schooling > .secondary {
-    position: relative;
-    height: 100%;
-    width: 50%;
-    right: 0;
-    float: right;
-}
-
-.schooling > .secondary:hover {
-    background: #fce57e;
-}
-
-
-
-/**
 *   Listing
 */
 
