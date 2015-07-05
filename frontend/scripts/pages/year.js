@@ -26,10 +26,12 @@ var Year = React.createClass({
             }else{
                 currentYear--;
             }
-            //TODO upper lower bounds
-            this.setState({
-                year: currentYear
-            });
+            if(currentYear > 1980 && currentYear < 2005)
+            {
+                this.setState({
+                    year: currentYear
+                });
+            }
         }.bind(this), 100);
     },
 
