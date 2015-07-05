@@ -60,10 +60,14 @@ html *  {
 * States
 */
 
+.state{
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+}
+
 svg{
-    top: 100px;
-    left: 25%;
-    position: absolute;
+    margin: auto;
 }
 
 svg > path {

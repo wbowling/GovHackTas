@@ -33,6 +33,7 @@ var Year = React.createClass({
                 });
             }
         }.bind(this), 100);
+
     },
 
     mouseUp(){
