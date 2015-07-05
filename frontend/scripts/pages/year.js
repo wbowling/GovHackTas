@@ -34,7 +34,7 @@ var Year = React.createClass({
                 <button className="year--control up" onClick={this.addYear}>&#x25B2;</button>
                 <input className="year--input" disabled="disabled" type="number" min="1930" max="1999" value={this.state.year}></input>
                 <button className="year--control down" onClick={this.takeYear}>&#x25BC;</button>
-                <Link to="state" params={{year: this.state.year}}>Pick State</Link>
+                <Link className="year--nav" to="state" params={{year: this.state.year}}><i className="fa fa-map-marker"></i>Pick State</Link>
             </div>
         );
     }

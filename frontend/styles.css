@@ -56,6 +56,21 @@ html *  {
     text-align: center;
 }
 
+.year--nav{
+    position: absolute;
+    top: 600px;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 34px;
+}
+
+.year--nav > i{
+    padding-right: 8px;
+}
+
 /**
 * States
 */
@@ -150,9 +165,9 @@ img.loading{
 }
 
 .fa.fa-home {
-    font-size:1.9em;
-    right:5px;
-    top:45px;
+    font-size:2.3em;
+    right:13px;
+    top:107px;
     position: absolute;
     color:black;
     display:inline;
