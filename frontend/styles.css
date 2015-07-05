@@ -150,3 +150,16 @@ img.loading{
     text-align: left;
     font-size: 24px;
 }
+
+.listing--control {
+    background: none;
+    outline: none;
+    border:none;
+    color: black;
+    font-size:32px;
+    cursor: pointer;
+}
+
+.listing--control:hover {
+    color: rgb(119, 119, 123)
+}
