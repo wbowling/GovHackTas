@@ -118,6 +118,11 @@ img.loading{
     font-size: 24px;
 }
 
+.listing-item--no-content > p {
+    font-size: 26px;
+    text-align: center;
+}
+
 .listing--control {
     background: none;
     outline: none;
