@@ -104,6 +104,7 @@ img.loading{
     cursor: pointer;
     border: 2px solid gray;
     box-shadow: 2px 2px gray;
+    z-index: 10;
 }
 
 
@@ -124,8 +125,23 @@ img.loading{
     color: black;
     font-size:32px;
     cursor: pointer;
+    z-index: 20;
+    display: inline-block;
 }
 
 .listing--control:hover {
+    color: rgb(119, 119, 123)
+}
+
+.fa.fa-home {
+    font-size:1.9em;
+    right:5px;
+    top:45px;
+    position: absolute;
+    color:black;
+    display:inline;
+}
+
+.fa.fa-home:hover {
     color: rgb(119, 119, 123)
 }
