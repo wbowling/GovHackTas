@@ -83,7 +83,7 @@ class ParserOptions():
     if not options.name:
         parser.error('Series name not given.')
 
-    name = str(options.name)
+    name = str(options.name.title())
     season = str(options.season)
     episode = str(options.episode)
     # TODO FIX HACK BELOW
