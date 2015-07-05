@@ -30,11 +30,11 @@ def get_first_video_intro(name):
     youtube_search_str = (
         'https://www.googleapis.com/youtube/v3/search?part=snippet' +
         '&type=video' +
-        '&q=' + str(urllib.quote(name)) + " Intro"
+        '&q=' + str(urllib.quote(name)) + "%20Intro"
         '&maxResults=1' +
         # '&topicId=/m/01xrzjs ' TODO Make this work
         '&key=' + YOUTUBE_API_KEY)
-    youtube_search requests.get(youtube_search_str)
+    youtube_search = requests.get(youtube_search_str)
 
     reponse = youtube_search.content
 
