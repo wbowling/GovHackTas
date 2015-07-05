@@ -27,7 +27,7 @@ import akka.http.scaladsl.model.HttpResponse
 import com.hacks.tvdb.SeriesLookup.SeriesLookupResult
 import akka.http.scaladsl.model.headers._
 import akka.http.scaladsl.model.HttpMethods._
-
+import org.apache.commons.lang3.text.WordUtils
 /**
  * @author tleuser
  */
@@ -66,8 +66,11 @@ object TvQueries extends App {
   def searchToAggs(searchResp: SearchResponse): AiringResults = {
     val searchAggs = searchResp.getAggregations
     val airs = searchResp.getHits.map(hitToAiring).toIterable
-    val series: Terms = searchResp.getAggregations().get("series");
-    AiringResults(airs, series.getBuckets.map(b => Show(b.getKey, b.getDocCount)).filter { !_.name.isEmpty })
+    val series: Terms = searchResp.getAggregations().get("series")
+    val shows = series.getBuckets.map(b => (WordUtils.capitalizeFully(b.getKey), b.getDocCount)).filter { !_._1.isEmpty }
+    AiringResults(airs, shows.groupBy(_._1).map {
+      case (name, counts) => Show(name, counts.map(_._2).reduce(_ + _))
+    })
   }
 
   def hitToAiring(searchHit: SearchHit): Airing = {

@@ -3,7 +3,8 @@ EclipseKeys.withSource := true
 val libs = Seq(
 	"com.typesafe.akka" % "akka-http-experimental_2.11" % "1.0-RC4",
 	"com.typesafe.akka" % "akka-http-spray-json-experimental_2.11" % "1.0-RC4",
-	"org.elasticsearch" % "elasticsearch" % "1.6.0"
+	"org.elasticsearch" % "elasticsearch" % "1.6.0",
+	"org.apache.commons" % "commons-lang3" % "3.4"
 	
 )
 
